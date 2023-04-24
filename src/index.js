@@ -4,6 +4,9 @@ import HomeScreen from "./screens/HomeScreen";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import SplashScreen from "./screens/SplashScreen";
+import GameScreen from "./screens/GameScreen";
+import LoginScreen from "./screens/LoginScreen";
+import RegisterScreen from "./screens/RegisterScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -11,11 +14,11 @@ export default function RootNavigation() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-      <Stack.Screen
-          name="HomeScreen"
-          component={HomeScreen}
+        <Stack.Screen
+          name="SplashScreen"
+          component={SplashScreen}
           options={{
-            headerShown: true,
+            headerShown: false,
           }}
         />
         <Stack.Screen
@@ -26,29 +29,8 @@ export default function RootNavigation() {
           }}
         />
         <Stack.Screen
-          name="SplashScreen"
-          component={SplashScreen}
-          options={{
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="GameScreen"
-          component={GameScreen}
-          options={{
-            headerShown: true,
-          }}
-        />
-        <Stack.Screen
           name="LoginScreen"
           component={LoginScreen}
-          options={{
-            headerShown: true,
-          }}
-        />
-        <Stack.Screen
-          name="RecoverScreen"
-          component={RecoverScreen}
           options={{
             headerShown: true,
           }}
@@ -60,7 +42,7 @@ export default function RootNavigation() {
             headerShown: true,
           }}
         />
-        </Stack.Navigator>
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }
@@ -74,9 +56,19 @@ function TabsNavigation() {
         name="HomeScreen"
         component={HomeScreen}
         options={{
-          tabBarLabel: "Início",
+          tabBarLabel: "HomeScreen",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="home" color={color} size={26} />
+            <MaterialCommunityIcons name="home-outline" color={color} size={26} />
+          ),
+        }}
+      />
+      <tabs.Screen
+        name="GameScreen"
+        component={GameScreen}
+        options={{
+          tabBarLabel: "GameScreen",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="gamepad-variant-outline" color={color} size={26} />
           ),
         }}
       />
