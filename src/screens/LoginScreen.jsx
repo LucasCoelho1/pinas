@@ -19,7 +19,6 @@ export default function LoginScreen({ navigation }) {
       .catch((error) => {
         console.log("Erro ao logar: ", error);
         const errorCode = error.code; 
-        auth/weak-password;
         // Mensagem de erro
         if (errorCode === "auth/invalid-email") {
           console.log("Email inválido!");

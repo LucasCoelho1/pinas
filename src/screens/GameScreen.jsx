@@ -4,14 +4,14 @@ import { Button, Text } from "react-native-paper";
 import { styles } from "../utils/styles";
 
 export default function RMGameScreen() {
-  const [personagem, setPersonagem] = useState(null);
+  const [agente, setagente] = useState(null);
   const [totalPersonagens, setTotalPersonagens] = useState(1);
   const [resultado, setResultado] = useState(null);
   const [pontuacao, setPontuacao] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    fetch("https://api.api-onepiece.com/characters")
+    fetch("https://valorant-api.com/v1/agents/")
       .then((response) => response.json())
       .then((json) => {
         setTotalPersonagens(json.info.count);
@@ -23,18 +23,18 @@ export default function RMGameScreen() {
   }, [totalPersonagens]);
 
   function BuscarPerson() {
-    fetch("https://api.api-onepiece.com/characters/" + returnRandomNumber())
+    fetch("https://valorant-api.com/v1/agents/" + returnRandomName())
       .then((response) => response.json())
       .then((json) => {
-        setPersonagem(json);
+        setagente(json);
         setResultado(null);
       });
   }
 
-  async function handlePersonagemVivoOuMorto(resposta) {
+  async function handleagenteVivoOuMorto(resposta) {
     setIsLoading(true);
-    const isvivant = personagem.status === "vivant";
-    if (resposta === isvivant) {
+    const namecorreto = agente.name;
+    if (resposta === namecorreto) {
       setResultado("Parabéns, você acertou!");
       setPontuacao(pontuacao + 1);
     } else {
@@ -47,14 +47,13 @@ export default function RMGameScreen() {
     }, 500);
   }
 
-  const returnRandomNumber = () => {
-    let randomNumber = Math.floor(Math.random() * totalPersonagens) + 1;
+  const returnRandomName = () => {
+    let randomName = Math.floor(Math.random() * agente.name) + 1;
 
-    // canoot return 0
-    if (randomNumber === 0) {
+    if (randomName === 0) {
       return 1;
     }
-    return randomNumber;
+    return randomName;
   };
 
   return (
@@ -67,11 +66,11 @@ export default function RMGameScreen() {
           borderRadius: 10,
         }}
       >
-        <Text style={styles.title}>One Piece Game</Text>
+        <Text style={styles.title}>agente Game</Text>
         <Text style={styles.subtitle}>
-          Você sabe o nome deste personagem?
+          Você sabe o nome deste agente?
         </Text>
-        {personagem && (
+        {agente && (
           <View>
             <View
               style={{
@@ -81,39 +80,35 @@ export default function RMGameScreen() {
               }}
             >
               <Image
-                source={{ uri: personagem.image }}
+                source={{ uri: agente.image }}
                 style={{ width: 200, height: 200, marginTop: 20, border: "5px black solid", borderRadius: 20 }}
               />
             </View>
-            <Text
-              style={{ fontSize: 25, textAlign: "center", marginVertical: 20 }}
-            >
-              Como o/a {personagem.name} está?
-            </Text>
             <View
               style={{
                 alignItems: "center",
                 flexDirection: "row",
                 justifyContent: "center",
                 textAlign: "center",
+                marginTop: 20,
               }}
             >
               <View style={{ alignItems: "center", marginRight: 20 }}>
                 <Button
                   mode="contained"
-                  onPress={() => handlePersonagemVivoOuMorto(true)}
+                  onPress={() => handleagenteVivoOuMorto(true)}
                   disabled={isLoading}
                 >
-                  Vivo
+                  {agente.name}
                 </Button>
               </View>
               <View style={{ alignItems: "center", marginRight: 20 }}>
                 <Button
                   mode="contained"
-                  onPress={() => handlePersonagemVivoOuMorto(false)}
+                  onPress={() => handleagenteVivoOuMorto(false)}
                   disabled={isLoading}
                 >
-                  Morto
+                  {agente.name}
                 </Button>
               </View>
             </View>
