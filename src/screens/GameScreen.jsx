@@ -1,126 +1,166 @@
-import { useEffect, useState } from "react";
-import { Image, View } from "react-native";
-import { Button, Text } from "react-native-paper";
-import { styles } from "../utils/styles";
+import React, { useState, useEffect } from "react";
+import { View } from "react-native";
 
-export default function RMGameScreen() {
-  const [agente, setagente] = useState(null);
-  const [totalPersonagens, setTotalPersonagens] = useState(1);
-  const [resultado, setResultado] = useState(null);
-  const [pontuacao, setPontuacao] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    fetch("https://valorant-api.com/v1/agents/")
-      .then((response) => response.json())
-      .then((json) => {
-        setTotalPersonagens(json.info.count);
-      });
-  }, []);
-
-  useEffect(() => {
-    BuscarPerson();
-  }, [totalPersonagens]);
-
-  function BuscarPerson() {
-    fetch("https://valorant-api.com/v1/agents/" + returnRandomName())
-      .then((response) => response.json())
-      .then((json) => {
-        setagente(json);
-        setResultado(null);
-      });
-  }
-
-  async function handleagenteVivoOuMorto(resposta) {
-    setIsLoading(true);
-    const namecorreto = agente.name;
-    if (resposta === namecorreto) {
-      setResultado("Parabéns, você acertou!");
-      setPontuacao(pontuacao + 1);
-    } else {
-      setResultado("Que pena, você errou!");
-      setPontuacao(pontuacao - 1);
-    }
-    setTimeout(() => {
-      BuscarPerson();
-      setIsLoading(false);
-    }, 500);
-  }
-
-  const returnRandomName = () => {
-    let randomName = Math.floor(Math.random() * agente.name) + 1;
-
-    if (randomName === 0) {
-      return 1;
-    }
-    return randomName;
-  };
-
+export default function GameQuiz() {
   return (
-    <View style={styles.container}>
-      <View
-        style={{
-          border: "7px double black",
-          alignItems: "Center",
-          padding: 30,
-          borderRadius: 10,
-        }}
-      >
-        <Text style={styles.title}>agente Game</Text>
-        <Text style={styles.subtitle}>
-          Você sabe o nome deste agente?
-        </Text>
-        {agente && (
-          <View>
-            <View
-              style={{
-                alignItems: "center",
-                justifyContent: "center",
-                textAlign: "center",
-              }}
-            >
-              <Image
-                source={{ uri: agente.image }}
-                style={{ width: 200, height: 200, marginTop: 20, border: "5px black solid", borderRadius: 20 }}
-              />
-            </View>
-            <View
-              style={{
-                alignItems: "center",
-                flexDirection: "row",
-                justifyContent: "center",
-                textAlign: "center",
-                marginTop: 20,
-              }}
-            >
-              <View style={{ alignItems: "center", marginRight: 20 }}>
-                <Button
-                  mode="contained"
-                  onPress={() => handleagenteVivoOuMorto(true)}
-                  disabled={isLoading}
-                >
-                  {agente.name}
-                </Button>
-              </View>
-              <View style={{ alignItems: "center", marginRight: 20 }}>
-                <Button
-                  mode="contained"
-                  onPress={() => handleagenteVivoOuMorto(false)}
-                  disabled={isLoading}
-                >
-                  {agente.name}
-                </Button>
-              </View>
-            </View>
-            {resultado && (
-              <Text style={{ textAlign: "center", marginVertical: 20 }}>
-                {resultado}
-              </Text>
-            )}
-            <Text style={{ textAlign: "center", marginVertical: 20 }}>Pontuação: {pontuacao}</Text>
-          </View>
-        )}
-      </View>
+    <View>
+      <Text>GameQuiz</Text>
+      <Image></Image>
+      <Button>opção 1</Button>
+      <Button>opção 2</Button>
+      <Button>opção 3</Button>
     </View>
   );
 }
+
+const mock = [
+  {
+    id: 1,
+    Name: "Gekko",
+    Image:
+      "https://media.valorant-api.com/agents/e370fa57-4757-3604-3648-499e1f642d3f/displayicon.png",
+    respCorrect: 2,
+  },
+  {
+    id: 2,
+    Name: "Fade",
+    Image:
+      "https://media.valorant-api.com/agents/dade69b4-4f5a-8528-247b-219e5a1facd6/displayicon.png",
+    respCorrect: 2,
+  },
+  {
+    id: 3,
+    Name: "Breach",
+    Image:
+      "https://media.valorant-api.com/agents/5f8d3a7f-467b-97f3-062c-13acf203c006/displayicon.png",
+    respCorrect: 2,
+  },
+  {
+    id: 4,
+    Name: "Raze",
+    Image:
+      "https://media.valorant-api.com/agents/f94c3b30-42be-e959-889c-5aa313dba261/displayicon.png",
+    respCorrect: 1,
+  },
+  {
+    id: 5,
+    Name: "Chamber",
+    Image:
+      "https://media.valorant-api.com/agents/22697a3d-45bf-8dd7-4fec-84a9e28c69d7/displayicon.png",
+    respCorrect: 2,
+  },
+  {
+    id: 6,
+    Name: "KAY/O",
+    Image:
+      "https://media.valorant-api.com/agents/601dbbe7-43ce-be57-2a40-4abd24953621/displayicon.png",
+    respCorrect: 3,
+  },
+  {
+    id: 7,
+    Name: "Skye",
+    Image:
+      "https://media.valorant-api.com/agents/6f2a04ca-43e0-be17-7f36-b3908627744d/displayicon.png",
+    respCorrect: 3,
+  },
+  {
+    id: 8,
+    Name: "Cypher",
+    Image:
+      "https://media.valorant-api.com/agents/117ed9e3-49f3-6512-3ccf-0cada7e3823b/displayicon.png",
+    respCorrect: 3,
+  },
+  {
+    id: 9,
+    Name: "Sova",
+    Image:
+      "https://media.valorant-api.com/agents/ded3520f-4264-bfed-162d-b080e2abccf9/displayicon.png",
+    respCorrect: 1,
+  },
+  {
+    id: 10,
+    Name: "Killjoy",
+    Image:
+      "https://media.valorant-api.com/agents/1e58de9c-4950-5125-93e9-a0aee9f98746/displayicon.png",
+    respCorrect: 1,
+  },
+  {
+    id: 11,
+    Name: "Harbor",
+    Image:
+      "https://media.valorant-api.com/agents/95b78ed7-4637-86d9-7e41-71ba8c293152/displayicon.png",
+    respCorrect: 1,
+  },
+  {
+    id: 12,
+    Name: "Viper",
+    Image:
+      "https://media.valorant-api.com/agents/707eab51-4836-f488-046a-cda6bf494859/displayicon.png",
+    respCorrect: 1,
+  },
+  {
+    id: 13,
+    Name: "Phoenix",
+    Image:
+      "https://media.valorant-api.com/agents/eb93336a-449b-9c1b-0a54-a891f7921d69/displayicon.png",
+    respCorrect: 2,
+  },
+  {
+    id: 14,
+    Name: "Astra",
+    Image:
+      "https://media.valorant-api.com/agents/41fb69c1-4189-7b37-f117-bcaf1e96f1bf/displayicon.png",
+    respCorrect: 1,
+  },
+  {
+    id: 15,
+    Name: "Brimstone",
+    Image:
+      "https://media.valorant-api.com/agents/9f0d8ba9-4140-b941-57d3-a7ad57c6b417/displayicon.png",
+    respCorrect: 3,
+  },
+  {
+    id: 16,
+    Name: "Neon",
+    Image:
+      "https://media.valorant-api.com/agents/bb2a4828-46eb-8cd1-e765-15848195d751/displayicon.png",
+    respCorrect: 3,
+  },
+  {
+    id: 17,
+    Name: "Yoru",
+    Image:
+      "https://media.valorant-api.com/agents/7f94d92c-4234-0a36-9646-3a87eb8b5c89/displayicon.png",
+    respCorrect: 1,
+  },
+  {
+    id: 18,
+    Name: "Sage",
+    Image:
+      "https://media.valorant-api.com/agents/569fdd95-4d10-43ab-ca70-79becc718b46/displayicon.png",
+    respCorrect: 3,
+  },
+  {
+    id: 19,
+    Name: "Reyna",
+    Image:
+      "https://media.valorant-api.com/agents/a3bfb853-43b2-7238-a4f1-ad90e9e46bcc/displayicon.png",
+    respCorrect: 3,
+  },
+  {
+    id: 20,
+    Name: "Omen",
+    Image:
+      "https://media.valorant-api.com/agents/8e253930-4c05-31dd-1b6c-968525494517/displayicon.png",
+    respCorrect: 2,
+  },
+  {
+    id: 21,
+    Name: "Jett",
+    Image:
+      "https://media.valorant-api.com/agents/add6443a-41bd-e414-f6ad-e58d267f4e95/displayicon.png",
+    respCorrect: 2,
+  },
+];
+
+return <View style={styles.container}></View>;
