@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { View } from "react-native";
-import { Text, Image, Button } from "react-native-paper";
+import { View, Image } from "react-native";
+import { Text, Button} from "react-native-paper";
 
 export default function GameQuiz() {
 
@@ -153,28 +153,76 @@ export default function GameQuiz() {
       respCorrect: 2,
     },
   ];
-  
+  const [agent, setAgent] = useState(0);
+  const [valorAleatorio, setValorAleatorio] = useState(0);
+  const [buttonValues, setButtonValues] = useState([0, 0, 0]);
+  const [buttonNames, setButtonNames] = useState(["", "", ""]);
+  const [correctButton, setCorrectButton] = useState(0);
 
-  const returnRandomNumber = () => {
-    let randomNumber = Math.floor(Math.random() * 21) + 1;
+  const generateRandomNumber = () => {
+    const len = mock.length;
+    return Math.floor(Math.random() * len);
+  };
 
-    if (randomNumber === 0) {
-        return 1;
-    } else {
-        return randomNumber;
+  const randomAgent = e => {
+    const len = mock.length;
+    setValorAleatorio(Math.floor(Math.random() * len));
+    setAgent(valorAleatorio);
+    setCorrectButton(valorAleatorio);
+    generateButtonValues();
+  };
+
+  const generateButtonValues = (correctButton) => {
+    // const len = mock.length;
+    const values = [0, 0, 0];
+    values[correctButton] = agent;
+    for (let i = 0; i < 3; i++) {
+      if (values[i]===0) {
+        let newValue = generateRandomNumber();
+        while (values.includes(newValue)) {
+          newValue = generateRandomNumber();
+        }
+        values[i] = newValue;
+      }
     }
-}
+    setButtonValues(values);
+    setButtonNames(values.map((value) => mock[value].Name));
+  };
+
+  const handleButtonPress = (buttonValue) => {
+    if (buttonValue === correctButton) {
+      alert('Parabéns!');
+    } else {
+      alert('Que pena, tente novamente.');
+    }
+    randomAgent();
+    setCorrectButton(agent);
+  };
+
+  function handleButtonNone() {
+    if (buttonValues[0] !== correctButton && buttonValues[1] !== correctButton && buttonValues[2] !== correctButton) {
+      alert('Parabéns!');
+    } else {
+      alert('Que pena, tente novamente.');
+    }
+    randomAgent();
+    setCorrectButton(agent);
+  }
 
 
   return (
     <View>
       <Text>GameQuiz</Text>
-      <Image></Image>
-      <Button>opção 1</Button>
-      <Button>opção 2</Button>
-      <Button>opção 3</Button>
-    </View> 
+      <Image source={{uri:mock[agent].Image}} style={{ width:100, height:100 }}/>
+      <Button onPress={randomAgent} mode="contained">pogsawf</Button>
+      <Button onPress={() => handleButtonPress(buttonValues[0])}>{buttonNames[0]}</Button>
+      <Button onPress={() => handleButtonPress(buttonValues[1])}>{buttonNames[1]}</Button>
+      <Button onPress={() => handleButtonPress(buttonValues[2])}>{buttonNames[2]}</Button>
+      <Button onPress={() => handleButtonNone()}>Nenhuma das opções</Button>
+    </View>
+
   ); 
 
 }
 
+// url:[mock[agent].Image]
