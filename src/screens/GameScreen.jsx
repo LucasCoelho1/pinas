@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Image } from "react-native";
-import { Text, Button} from "react-native-paper";
+import { Text, Button, MD3TypescaleKey} from "react-native-paper";
 
 export default function GameQuiz() {
 
@@ -155,9 +155,9 @@ export default function GameQuiz() {
   ];
   const [agent, setAgent] = useState(0);
   const [valorAleatorio, setValorAleatorio] = useState(0);
-  const [buttonValues, setButtonValues] = useState([0, 0, 0]);
+  const [buttonValues, setButtonValues] = useState([1, 2, 3]);
   const [buttonNames, setButtonNames] = useState(["", "", ""]);
-  const [correctButton, setCorrectButton] = useState(0);
+  const [correctButton, setCorrectButton] = [agent];
 
   const generateRandomNumber = () => {
     const len = mock.length;
@@ -168,7 +168,6 @@ export default function GameQuiz() {
     const len = mock.length;
     setValorAleatorio(Math.floor(Math.random() * len));
     setAgent(valorAleatorio);
-    setCorrectButton(valorAleatorio);
     generateButtonValues();
   };
 
@@ -195,8 +194,8 @@ export default function GameQuiz() {
     } else {
       alert('Que pena, tente novamente.');
     }
+    setAgent(0);
     randomAgent();
-    setCorrectButton(agent);
   };
 
   function handleButtonNone() {
@@ -209,15 +208,17 @@ export default function GameQuiz() {
     setCorrectButton(agent);
   }
 
+  function enviar(){
+
+  }
 
   return (
     <View>
       <Text>GameQuiz</Text>
       <Image source={{uri:mock[agent].Image}} style={{ width:100, height:100 }}/>
-      <Button onPress={randomAgent} mode="contained">pogsawf</Button>
-      <Button onPress={() => handleButtonPress(buttonValues[0])}>{buttonNames[0]}</Button>
-      <Button onPress={() => handleButtonPress(buttonValues[1])}>{buttonNames[1]}</Button>
-      <Button onPress={() => handleButtonPress(buttonValues[2])}>{buttonNames[2]}</Button>
+      <Button onPress={() => handleButtonPress(buttonValues[0])} mode="contained">{buttonNames[0]}</Button>
+      <Button onPress={() => handleButtonPress(buttonValues[1])} mode="contained">{buttonNames[1]}</Button>
+      <Button onPress={() => handleButtonPress(buttonValues[2])} mode="contained">{buttonNames[2]}</Button>
       <Button onPress={() => handleButtonNone()}>Nenhuma das opções</Button>
     </View>
 
@@ -226,3 +227,5 @@ export default function GameQuiz() {
 }
 
 // url:[mock[agent].Image]
+
+// setCorrectButton(agent);
