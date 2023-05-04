@@ -1,8 +1,35 @@
 import React, { useState, useEffect } from "react";
 import { View, Image } from "react-native";
-import { Text, Button, MD3TypescaleKey} from "react-native-paper";
+import { Text, Button } from "react-native-paper";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import {  } from "firebase/database";
+
 
 export default function GameQuiz() {
+
+  useEffect(() => {
+    generateButtonValues();
+  }, []);
+
+  useEffect (() => {
+    randomAgent();
+  }, []);
+
+  useEffect(() => {
+    generateButtonValues();
+  }, []);
+
+  useEffect (() => {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUsuario(user.email);
+        // ...
+      } else {
+        setUsuario("Deslogado");
+      }
+    });
+  }, []);
 
   const mock = [
     {
@@ -155,9 +182,11 @@ export default function GameQuiz() {
   ];
   const [agent, setAgent] = useState(0);
   const [valorAleatorio, setValorAleatorio] = useState(0);
-  const [buttonValues, setButtonValues] = useState([1, 2, 3]);
+  const [buttonValues, setButtonValues] = useState([0, 0, 0]);
   const [buttonNames, setButtonNames] = useState(["", "", ""]);
   const [correctButton, setCorrectButton] = [agent];
+  const [score, setScore] = useState(0);
+  const [usuario, setUsuario] = useState("");
 
   const generateRandomNumber = () => {
     const len = mock.length;
@@ -170,6 +199,8 @@ export default function GameQuiz() {
     setAgent(valorAleatorio);
     generateButtonValues();
   };
+
+  
 
   const generateButtonValues = (correctButton) => {
     // const len = mock.length;
@@ -191,8 +222,13 @@ export default function GameQuiz() {
   const handleButtonPress = (buttonValue) => {
     if (buttonValue === correctButton) {
       alert('Parabéns!');
+      setScore (score + 1);
     } else {
       alert('Que pena, tente novamente.');
+      if (score > 0){
+        setScore (score - 1);
+      }
+      
     }
     setAgent(0);
     randomAgent();
@@ -200,26 +236,28 @@ export default function GameQuiz() {
 
   function handleButtonNone() {
     if (buttonValues[0] !== correctButton && buttonValues[1] !== correctButton && buttonValues[2] !== correctButton) {
+      setScore (score + 1);
       alert('Parabéns!');
     } else {
       alert('Que pena, tente novamente.');
+      if(score > 0){
+        setScore (score - 1);
+      } 
     }
     randomAgent();
     setCorrectButton(agent);
   }
 
-  function enviar(){
-
-  }
-
   return (
     <View>
       <Text>GameQuiz</Text>
+      <Text>{score}</Text>
       <Image source={{uri:mock[agent].Image}} style={{ width:100, height:100 }}/>
       <Button onPress={() => handleButtonPress(buttonValues[0])} mode="contained">{buttonNames[0]}</Button>
       <Button onPress={() => handleButtonPress(buttonValues[1])} mode="contained">{buttonNames[1]}</Button>
       <Button onPress={() => handleButtonPress(buttonValues[2])} mode="contained">{buttonNames[2]}</Button>
       <Button onPress={() => handleButtonNone()}>Nenhuma das opções</Button>
+      <Text>{usuario}</Text>
     </View>
 
   ); 
