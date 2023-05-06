@@ -32,7 +32,11 @@ export default function RootNavigation() {
           name="LoginScreen"
           component={LoginScreen}
           options={{
-            headerShown: true,
+            headerShown: true, 
+            headerStyle: {
+              backgroundColor: '#000',
+            },
+            headerTintColor: '#fff',
           }}
         />
         <Stack.Screen
@@ -40,6 +44,10 @@ export default function RootNavigation() {
           component={RegisterScreen}
           options={{
             headerShown: true,
+            headerStyle: {
+              backgroundColor: '#000',
+            },
+            headerTintColor: '#fff',
           }}
         />
       </Stack.Navigator>

@@ -253,13 +253,40 @@ export default function GameQuiz() {
       <Text>GameQuiz</Text>
       <Text>{score}</Text>
       <Image source={{uri:mock[agent].Image}} style={{ width:100, height:100 }}/>
-      <Button onPress={() => handleButtonPress(buttonValues[0])} mode="contained">{buttonNames[0]}</Button>
-      <Button onPress={() => handleButtonPress(buttonValues[1])} mode="contained">{buttonNames[1]}</Button>
-      <Button onPress={() => handleButtonPress(buttonValues[2])} mode="contained">{buttonNames[2]}</Button>
-      <Button onPress={() => handleButtonNone()}>Nenhuma das opções</Button>
+      <Button 
+        style={{
+          width: "100%",
+          backgroundColor: "#ff4655",
+          borderRadius: 0,
+        }}
+      onPress={() => handleButtonPress(buttonValues[0])} mode="contained">{buttonNames[0]}</Button>
+
+      <Button 
+        style={{
+          width: "100%",
+          backgroundColor: "#ff4655",
+          borderRadius: 0,
+        }}
+      onPress={() => handleButtonPress(buttonValues[1])} mode="contained">{buttonNames[1]}</Button>
+
+      <Button 
+        style={{
+          width: "100%",
+          backgroundColor: "#ff4655",
+          borderRadius: 0,
+        }}
+      onPress={() => handleButtonPress(buttonValues[2])} mode="contained">{buttonNames[2]}</Button>
+
+      <Button 
+        style={{
+          width: "100%",
+          backgroundColor: "#ff4655",
+          borderRadius: 0,
+        }}
+      onPress={() => handleButtonNone()}>Nenhuma das opções</Button>
+
       <Text>{usuario}</Text>
     </View>
-
   ); 
 
 }

@@ -8,6 +8,36 @@ export const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+    textAlign: "center",
+    fontFamily: "georgia"
+  },
+
+  center: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  stackLogin: {
+    backgroundColor: "#000000",
+  },
+
+  Login: {
+    width: '350px',
+    marginBottom: "8%",
+    color: "#fff",
+  },
+
+  Register: {
+    width: '350px',
+    marginBottom: "8%",
+    color: "#fff",
+  },
+
+  title: {
+    fontSize: 30,
+    fontWeight: "bold",
+    color: "#ff4655",
+    textAlign: "center",
   },
 
   widthFull: {
@@ -45,6 +75,13 @@ export const styles = StyleSheet.create({
     height: 100,
     resizeMode: "contain",
   },
+
+  input: {
+    width: "100%",
+    backgroundColor: "#020709",
+    textColor:"#fff"
+  },
+
 });
 
 export default styles;

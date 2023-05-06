@@ -8,7 +8,9 @@ export default function HomeScreen({ navigation }) {
       <Text>Essa é a Home Screen</Text>
       <Button
         mode="contained"
-        style={styles.distBottomHome}
+        style={{
+          backgroundColor: "#020709",
+          color: "#fff",}}
         onPress={() => {
           navigation.navigate("LoginScreen");
         }}
@@ -17,6 +19,9 @@ export default function HomeScreen({ navigation }) {
       </Button>
       <Button
         mode="contained"
+        style={{
+          backgroundColor: "#020709",
+          color: "#fff",}}
         onPress={() => {
           navigation.navigate("RegisterScreen");
         }}

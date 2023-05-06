@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { View } from "react-native";
-import { Button, Paragraph, TextInput } from "react-native-paper";
+import { Image, ImageBackground, Text, View } from "react-native";
+import { Button, Paragraph, Provider, TextInput } from "react-native-paper";
 import { auth } from "../config/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import styles from "../utils/styles";
@@ -37,28 +37,61 @@ export default function RegisterScreen({ navigation }) {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.box}>
-        <Paragraph> Realize o seu cadastro {email}</Paragraph>
-        <TextInput
-          label={"Email"}
-          placeholder="Digite seu email"
-          value={email}
-          onChangeText={setEmail}
-          mode="outlined"
-        />
-        <TextInput
-          label={"Senha"}
-          placeholder="Digite sua senha"
-          secureTextEntry={true}
-          value={senha}
-          onChangeText={setSenha}
-          mode="outlined"
-        />
-        <Button mode="contained" onPress={handleRegister}>
-          Registre-se
-        </Button>
+    <Provider>
+      <View style={styles.container}>
+        <ImageBackground
+          source={require("../assets/bg-site.png")}
+          resizeMode="cover"
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            width: "100%",
+            height: "100%",
+          }}
+        >
+          <View style={styles.center}>
+            <View style={styles.Login}>
+              <View style={styles.center}>
+                <Image
+                  source={require("../assets/valorant-logo.png")}
+                  style={{ width: "50px", height: "50px" }}
+                />
+              </View>
+              <Text style={styles.title}>Realize o seu cadastro</Text>
+              <View style={styles.distBottom}></View>
+              <TextInput
+                label={"Email"}
+                value={email}
+                onChangeText={setEmail}
+                mode="outlined"
+                style={styles.input}
+              />
+              <View style={styles.distBottom}></View>
+              <TextInput
+                label={"Senha"}
+                secureTextEntry={true}
+                value={senha}
+                onChangeText={setSenha}
+                mode="outlined"
+                style={styles.input}
+              />
+              <View style={styles.distBottom}></View>
+              <Button
+                style={{
+                  width: "100%",
+                  backgroundColor: "#ff4655",
+                  borderRadius: 0,
+                }}
+                textColor="#fff"
+                mode="contained"
+                onPress={handleRegister}
+              >
+                Registre-se
+              </Button>
+            </View>
+          </View>
+        </ImageBackground>
       </View>
-    </View>
+    </Provider>
   );
 }
