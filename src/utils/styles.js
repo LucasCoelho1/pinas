@@ -27,6 +27,12 @@ export const styles = StyleSheet.create({
     color: "#fff",
   },
 
+  Home: {
+    width: '350px',
+    marginBottom: "8%",
+    color: "#fff",
+  },
+
   Register: {
     width: '350px',
     marginBottom: "8%",

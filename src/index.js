@@ -64,9 +64,9 @@ function TabsNavigation() {
         name="HomeScreen"
         component={HomeScreen}
         options={{
-          tabBarLabel: "HomeScreen",
+          tabBarLabel: "Home",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="home-outline" color={color} size={26} />
+            <MaterialCommunityIcons name="home-outline" color={"#ff4655"} size={26} />
           ),
         }}
       />
@@ -74,9 +74,9 @@ function TabsNavigation() {
         name="GameScreen"
         component={GameScreen}
         options={{
-          tabBarLabel: "GameScreen",
+          tabBarLabel: "Game",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="gamepad-variant-outline" color={color} size={26} />
+            <MaterialCommunityIcons name="gamepad-variant-outline" color={"#ff4655"} size={26} />
           ),
         }}
       />
