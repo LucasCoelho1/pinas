@@ -188,6 +188,8 @@ export default function GameQuiz() {
   const [correctButton, setCorrectButton] = [agent];
   const [score, setScore] = useState(0);
   const [usuario, setUsuario] = useState("");
+  const [message, setMessage] = useState("");
+
 
   const generateRandomNumber = () => {
     const len = mock.length;
@@ -220,12 +222,12 @@ export default function GameQuiz() {
 
   const handleButtonPress = (buttonValue) => {
     if (buttonValue === correctButton) {
-      alert('Parabéns!');
+      setMessage ('Joga muito! + 1 ponto');
       setScore (score + 1);
     } else {
-      alert('Que pena, tente novamente.');
+      setMessage('Putz... - 10 pontos');
       if (score > 0){
-        setScore (score - 1);
+        setScore (score - 10);
       }
       
     }
@@ -236,11 +238,11 @@ export default function GameQuiz() {
   function handleButtonNone() {
     if (buttonValues[0] !== correctButton && buttonValues[1] !== correctButton && buttonValues[2] !== correctButton) {
       setScore (score + 1);
-      alert('Parabéns!');
+      setMessage('Joga muito! + 1 ponto');
     } else {
-      alert('Que pena, tente novamente.');
+      setMessage('Putz... - 10 pontos');
       if(score > 0){
-        setScore (score - 1);
+        setScore (score - 10);
       } 
     }
     randomAgent();
@@ -302,6 +304,7 @@ export default function GameQuiz() {
       onPress={() => handleButtonNone()}>Nenhuma das opções</Button>
 
       <Text style={{ color: "#fff", textAlign: "center", fontFamily: "Franklin Gothic Medium", fontSize: 20, marginBottom: "5px", marginTop: "10px" }}>{usuario}</Text>
+      <Text style={{ color: "#FFEA61", textAlign: "center", fontFamily: "Franklin Gothic Medium", fontSize: 20,}}>{message}</Text>
       </View>
       </ImageBackground>
     </View>
