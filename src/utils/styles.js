@@ -27,6 +27,18 @@ export const styles = StyleSheet.create({
     color: "#fff",
   },
 
+  Game: {
+    alignItems: "center",
+    justifyContent: "center",
+    width: '350px',
+    marginBottom: "8%",
+    color: "#fff",
+    padding: 10,
+    border: "3px solid #DBD2D0",
+    borderRadius: 10,
+    backgroundColor: "#1c1c1c",
+  },
+
   Home: {
     width: '350px',
     marginBottom: "8%",
@@ -86,6 +98,13 @@ export const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "#020709",
     textColor:"#fff"
+  },
+
+  ImageGame: {
+    padding: 5, 
+    border: "2px white solid", 
+    borderRadius: 8, 
+    marginBottom: 5, 
   },
 
 });

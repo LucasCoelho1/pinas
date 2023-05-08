@@ -64,7 +64,7 @@ function TabsNavigation() {
       inactiveColor="#ffffff"
       barStyle={{ backgroundColor: '#1c1c1c' }}>
       <tabs.Screen
-        name="HomeScreen"
+        name="Home"
         component={HomeScreen}
         options={{
           tabBarLabel: "Home",
@@ -74,7 +74,7 @@ function TabsNavigation() {
         }}
       />
       <tabs.Screen
-        name="GameScreen"
+        name="Game"
         component={GameScreen}
         options={{
           tabBarLabel: "Game",

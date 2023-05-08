@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { View, Image } from "react-native";
+import { View, Image, ImageBackground } from "react-native";
 import { Text, Button } from "react-native-paper";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import {  } from "firebase/database";
+import styles from "../utils/styles";
 
 
 export default function GameQuiz() {
@@ -200,8 +201,6 @@ export default function GameQuiz() {
     generateButtonValues();
   };
 
-  
-
   const generateButtonValues = (correctButton) => {
     // const len = mock.length;
     const values = [0, 0, 0];
@@ -249,15 +248,30 @@ export default function GameQuiz() {
   }
 
   return (
-    <View>
-      <Text>GameQuiz</Text>
-      <Text>{score}</Text>
-      <Image source={{uri:mock[agent].Image}} style={{ width:100, height:100 }}/>
+    <View style={styles.container}>
+      <ImageBackground
+        source={require("../assets/bg-site.png")}
+        resizeMode="cover"
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          width: "100%",
+          height: "100%",
+          alignItems: "center",
+        }}
+      >
+      <View style={styles.Game}>
+      <Text style={{  color: "#fff", textAlign: "center", fontFamily: "Franklin Gothic Medium", fontSize: 20, marginBottom: "5px"}}>GameQuiz</Text>
+      <Text style={{  color: "#fff", textAlign: "center", fontFamily: "Franklin Gothic Medium", fontSize: 20, marginBottom: "5px"}}>Sua pontuação: {score}</Text>
+      <View style={styles.ImageGame}>
+        <Image source={{uri:mock[agent].Image}} style={{ width:100, height:100 }}/>
+      </View>
       <Button 
         style={{
           width: "100%",
           backgroundColor: "#ff4655",
-          borderRadius: 0,
+          borderRadius: 9,
+          marginBottom: "5px",
         }}
       onPress={() => handleButtonPress(buttonValues[0])} mode="contained">{buttonNames[0]}</Button>
 
@@ -265,7 +279,8 @@ export default function GameQuiz() {
         style={{
           width: "100%",
           backgroundColor: "#ff4655",
-          borderRadius: 0,
+          borderRadius: 9,
+          marginBottom: "5px",
         }}
       onPress={() => handleButtonPress(buttonValues[1])} mode="contained">{buttonNames[1]}</Button>
 
@@ -273,7 +288,8 @@ export default function GameQuiz() {
         style={{
           width: "100%",
           backgroundColor: "#ff4655",
-          borderRadius: 0,
+          borderRadius: 9,
+          marginBottom: "5px",
         }}
       onPress={() => handleButtonPress(buttonValues[2])} mode="contained">{buttonNames[2]}</Button>
 
@@ -281,11 +297,13 @@ export default function GameQuiz() {
         style={{
           width: "100%",
           backgroundColor: "#ff4655",
-          borderRadius: 0,
+          borderRadius: 9,
         }}
       onPress={() => handleButtonNone()}>Nenhuma das opções</Button>
 
-      <Text>{usuario}</Text>
+      <Text style={{ color: "#fff", textAlign: "center", fontFamily: "Franklin Gothic Medium", fontSize: 20, marginBottom: "5px", marginTop: "10px" }}>{usuario}</Text>
+      </View>
+      </ImageBackground>
     </View>
   ); 
 
