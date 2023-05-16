@@ -8,7 +8,15 @@ import GameScreen from "./screens/GameScreen";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 
+// Instancia um objeto Native Stack Navigator
 const Stack = createNativeStackNavigator();
+
+/**
+ * Função base da navegação do aplicativo
+ * 
+ * @returns {object} React Component
+ */
+
 
 export default function RootNavigation() {
   return (
@@ -55,8 +63,17 @@ export default function RootNavigation() {
   );
 }
 
+// Instancia um objeto Material Bottom Tabs Navigator
 const tabs = createMaterialBottomTabNavigator();
 
+/**
+ * Função responsavel pela navegação do Material Bottom Tabs
+ * @returns 
+ */
+
+/**
+ * 
+ */
 function TabsNavigation() {
   return (
     <tabs.Navigator

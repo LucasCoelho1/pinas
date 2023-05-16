@@ -235,6 +235,12 @@ export default function GameQuiz() {
     randomAgent();
   };
 
+  /**
+   * Função responsavel por verificar se 
+   * @async
+   * @param {boolean} resposta
+   * @returns {void}
+   */
   function handleButtonNone() {
     if (buttonValues[0] !== correctButton && buttonValues[1] !== correctButton && buttonValues[2] !== correctButton) {
       setScore (score + 1);
